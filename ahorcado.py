@@ -74,6 +74,9 @@ class JuegoAhorcado:
     Words = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
             'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
 
+    def __init__(self,fname):
+        self.name = fname
+
     def jugar(self):
 
         wrongletter = []
@@ -99,7 +102,7 @@ class JuegoAhorcado:
                 if win:
                     print(self.SALVADO[0])
                     print('¡Bien hecho! la palabra secreta es :', secreto)
-                    print('Has ganado!')
+                    print(f'Has ganado, {self.name}!')
                     break
             else:
                 wrongletter.append(currentletter)
@@ -151,5 +154,6 @@ class JuegoAhorcado:
 
 
 if __name__ == '__main__':
-    juego1 = JuegoAhorcado()
+    name = str(input("Dime tu nombre"))
+    juego1 = JuegoAhorcado(name)
     juego1.jugar()
