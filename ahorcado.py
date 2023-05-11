@@ -70,15 +70,20 @@ class JuegoAhorcado:
     / \ |
     ====="""]
 
-    Categories = 'FRUTAS'
-    Words = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
-            'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+    Categories = 'FRUTAS COCHES PAISES'.split()
+    Fruits = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
+             'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+    Cars = "FORD TOYOTA MERCEDES AUDI BMW KIA VOLKSWAGEN DACIA SEAT PEUGOT NISSAN".split()
+    Countries = "ESPAÑA ALEMANIA FRANCIA PERU ITALIA RUSIA ESLOVENIA ESLOVAQUIA SUIZA SUECIA ARGENTINA CANADA".split()
+
+    def __init__(self):
+        self.categoria = random.choice(self.Categories)
+        self.secreto = self.setCategoria(self.categoria)
 
     def jugar(self):
-
+        secreto = self.secreto
         wrongletter = []
         correctletter = []
-        secreto = random.choice(self.Words)
 
         while True:
             self.dibujar(wrongletter, correctletter, secreto)
@@ -116,7 +121,7 @@ class JuegoAhorcado:
 
     def dibujar(self, letrasincorrectas, letrascorrectas, secreto):
         print(self.ESTADOS[len(letrasincorrectas)])
-        print('La categoría es: ', self.Categories)
+        print('La categoría es: ', self.categoria)
         print()
 
         print('Letras incorrectas: ', end='')
@@ -153,6 +158,14 @@ class JuegoAhorcado:
                 print('Introduce una LETRA.')
             else:
                 return adivina
+
+    def setCategoria(self,fcategoria):
+        if fcategoria == "FRUTAS":
+            return random.choice(self.Fruits)
+        elif fcategoria == "COCHES":
+            return random.choice(self.Cars)
+        elif fcategoria == "PAISES":
+            return random.choice(self.Countries)
 
 
 if __name__ == '__main__':
