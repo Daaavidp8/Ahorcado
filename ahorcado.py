@@ -74,7 +74,7 @@ class JuegoAhorcado:
     Words = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
             'MANDARINA NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
 
-    def __init__(self,fname):
+    def __init__(self, fname):
         self.name = fname
 
     def jugar(self):
@@ -86,7 +86,7 @@ class JuegoAhorcado:
         while True:
             self.dibujar(wrongletter, correctletter, secreto)
 
-            currentletter = self.dimeletra(wrongletter + correctletter)
+            currentletter = self.dimeletra(wrongletter + correctletter, len(wrongletter))
 
             if currentletter in secreto:
 
@@ -94,8 +94,6 @@ class JuegoAhorcado:
 
                 win = True
                 for secretletter in secreto:
-                    print(correctletter)
-                    print(secretletter)
                     if secretletter not in correctletter:
                         win = False
                         break
@@ -123,9 +121,9 @@ class JuegoAhorcado:
             print(letter, end=' ')
         if len(letrasincorrectas) == 0 and 0 == len(letrasincorrectas):
             print('No hay letras incorrectas.')
-        if len(letrasincorrectas) == len(letrasincorrectas) + 1:
+        elif len(letrasincorrectas) == len(letrasincorrectas) + 1:
             print('Letras diferentes.')
-        if len(letrasincorrectas) == len(letrasincorrectas) + 2:
+        elif len(letrasincorrectas) == len(letrasincorrectas) + 2:
             print('No coinciden.')
 
         print()
@@ -138,9 +136,10 @@ class JuegoAhorcado:
 
         print(' '.join(spa))
 
-    def dimeletra(self, respuestas):
+    def dimeletra(self, respuestas, numletrasincorrectas):
         while True:
             print('Adivina una letra.')
+            self.intentosrestantes(numletrasincorrectas)
             adivina = input('> ').upper()
             if len(adivina) != 1:
                 print('Introduce una única letra.')
@@ -151,6 +150,10 @@ class JuegoAhorcado:
 
             else:
                 return adivina
+
+    def intentosrestantes(self, numletrasincorrectas):
+        intentos = (len(self.ESTADOS) - 1) - numletrasincorrectas
+        print(f"Tienes {intentos} intentos")
 
 
 if __name__ == '__main__':
