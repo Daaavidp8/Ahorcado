@@ -104,9 +104,13 @@ class JuegoAhorcado:
             else:
                 wrongletter.append(currentletter)
 
-                if len(wrongletter) == len(self.ESTADOS) - 1:
-                    self.dibujar(wrongletter, correctletter, secreto)
-                    print('Demasiados intentos!')
+                if len(wrongletter) == len(self.ESTADOS) - 1 or currentletter.lower() == "terminar":
+                    if currentletter.lower() == "terminar":
+                        print(self.ESTADOS[len(self.ESTADOS) - 1])
+                        print("Programa Finalizado por el usuario")
+                    else:
+                        self.dibujar(wrongletter, correctletter, secreto)
+                        print('Demasiados intentos!')
                     print('La palabra era "{}"'.format(secreto))
                     break
 
@@ -139,13 +143,14 @@ class JuegoAhorcado:
         while True:
             print('Adivina una letra.')
             adivina = input('> ').upper()
-            if len(adivina) != 1:
+            if adivina.lower() == "terminar":
+                return adivina
+            elif len(adivina) != 1:
                 print('Introduce una única letra.')
             elif adivina in respuestas:
                 print('Esa letra ya la sabías. Elige otra vez.')
             elif not adivina.isalpha():
                 print('Introduce una LETRA.')
-
             else:
                 return adivina
 
